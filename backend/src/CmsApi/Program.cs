@@ -5,10 +5,12 @@ using CmsApi.Data;
 using CmsApi.Entities;
 using CmsApi.Options;
 using CmsApi.Services;
+using CmsApi.Storage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -29,6 +31,15 @@ services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 services.AddScoped<DbSeeder>();
 services.AddSingleton<TokenService>();
 services.AddScoped<AuthService>();
+services.AddScoped<LandingPageService>();
+services.AddScoped<SectionService>();
+services.AddScoped<MenuService>();
+services.AddScoped<SeoService>();
+services.AddScoped<SiteSettingService>();
+services.AddScoped<UserService>();
+services.AddScoped<MediaService>();
+services.AddScoped<PublicService>();
+services.AddSingleton<IFileStorage, LocalFileStorage>();
 
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -124,6 +135,22 @@ if (configuration.GetValue<bool>("Swagger:Enabled"))
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var uploadRoot = LocalFileStorage.ResolveRoot(app.Services.GetRequiredService<IOptions<StorageOptions>>().Value, app.Environment);
+Directory.CreateDirectory(uploadRoot);
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadRoot),
+    RequestPath = LocalFileStorage.RequestPath,
+    OnPrepareResponse = context =>
+    {
+        var headers = context.Context.Response.Headers;
+        headers.CacheControl = "public,max-age=604800";
+        headers["X-Content-Type-Options"] = "nosniff";
+        // An SVG opened directly must not be able to run scripts on the API origin.
+        headers.ContentSecurityPolicy = "default-src 'none'; style-src 'unsafe-inline'; sandbox";
+    }
+});
 
 app.UseCors();
 app.UseRateLimiter();
