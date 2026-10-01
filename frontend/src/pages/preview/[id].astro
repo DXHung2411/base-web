@@ -1,0 +1,16 @@
+---
+import PageView from '../../components/PageView.astro';
+import { getPreviewPage, getPublicSettings } from '../../lib/api';
+import { getSiteConfig } from '../../lib/settingDefs';
+
+// Admin preview: renders a page (published or not) using a short-lived token issued by the API.
+Astro.response.headers.set('Cache-Control', 'no-store');
+
+const { id = '' } = Astro.params;
+const token = Astro.url.searchParams.get('token') ?? '';
+
+const site = getSiteConfig(await getPublicSettings());
+const page = await getPreviewPage(id, token).catch(() => null);
+if (!page) return new Response('Liên kết xem trước không hợp lệ hoặc đã hết hạn.', { status: 403 });
+---
+<PageView site={site} page={page} path={`/preview/${id}`} noindex />

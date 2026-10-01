@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { SiteConfig } from '../lib/settingDefs';
+import type { PublicPage } from '../types/api';
+import SectionRenderer from './sections/SectionRenderer.astro';
+
+interface Props {
+  site: SiteConfig;
+  page: PublicPage;
+  /** Path of the page on the site; "/" for the home page. */
+  path: string;
+  noindex?: boolean;
+}
+
+const { site, page, path, noindex = false } = Astro.props;
+---
+<BaseLayout
+  site={site}
+  title={page.seo?.metaTitle || page.title}
+  description={page.seo?.metaDescription || page.description}
+  path={path}
+  menu={page.menu}
+  seo={page.seo}
+  noindex={noindex}
+>
+  <SectionRenderer sections={page.sections} site={site} />
+</BaseLayout>

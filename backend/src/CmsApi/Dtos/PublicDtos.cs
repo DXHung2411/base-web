@@ -22,3 +22,5 @@ public sealed record PublicPageDto(
     IReadOnlyList<PublicSectionDto> Sections);
 
 public sealed record PublicPageSummaryDto(string Slug, DateTime UpdatedAt);
+
+public sealed record PreviewTokenDto(string Token);

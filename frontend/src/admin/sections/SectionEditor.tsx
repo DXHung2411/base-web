@@ -13,7 +13,8 @@ interface SectionEditorProps {
   def: SectionDef;
   /** Present when editing; absent when creating a new section. */
   section?: Section;
-  onSaved: (section: Section) => void;
+  /** `preview` is true when the user chose "Lưu và xem trước". */
+  onSaved: (section: Section, preview: boolean) => void;
   onClose: () => void;
 }
 
@@ -27,7 +28,7 @@ export function SectionEditor({ pageId, def, section, onSaved, onClose }: Sectio
   const [settings, setSettings] = useState<Record<string, unknown>>(initial.settings);
   const [saving, setSaving] = useState(false);
 
-  const save = async () => {
+  const save = async (preview: boolean) => {
     const input: SectionInput = {
       sectionType: def.type,
       title: title.trim() || undefined,
@@ -40,7 +41,7 @@ export function SectionEditor({ pageId, def, section, onSaved, onClose }: Sectio
     try {
       const saved = section ? await api.sections.update(section.id, input) : await api.sections.create(pageId, input);
       toast.success('Đã lưu section.');
-      onSaved(saved);
+      onSaved(saved, preview);
     } catch (error) {
       toast.error(errorMessage(error));
     } finally {
@@ -74,7 +75,8 @@ export function SectionEditor({ pageId, def, section, onSaved, onClose }: Sectio
       </div>
       <div class="mt-6 flex justify-end gap-2 border-t border-stone-200 pt-4">
         <Button variant="secondary" onClick={onClose}>Hủy</Button>
-        <Button loading={saving} onClick={() => void save()}>Lưu section</Button>
+        <Button variant="secondary" disabled={saving} onClick={() => void save(true)}>Lưu và xem trước</Button>
+        <Button loading={saving} onClick={() => void save(false)}>Lưu section</Button>
       </div>
     </Modal>
   );

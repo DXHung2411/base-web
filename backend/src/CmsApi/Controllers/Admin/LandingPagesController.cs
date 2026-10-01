@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CmsApi.Controllers.Admin;
 
 [Route("api/admin/landing-pages")]
-public sealed class LandingPagesController(LandingPageService pages, SectionService sections) : AdminControllerBase
+public sealed class LandingPagesController(LandingPageService pages, SectionService sections, TokenService tokens) : AdminControllerBase
 {
     [HttpGet]
     public async Task<ApiResponse<PagedResult<LandingPageDto>>> List(
@@ -34,6 +34,13 @@ public sealed class LandingPagesController(LandingPageService pages, SectionServ
     {
         await pages.DeleteAsync(id, ct);
         return ApiResponse.Ok();
+    }
+
+    [HttpPost("{id:int}/preview-token")]
+    public async Task<ApiResponse<PreviewTokenDto>> CreatePreviewToken(int id, CancellationToken ct)
+    {
+        await pages.GetAsync(id, ct);
+        return ApiResponse.Ok(new PreviewTokenDto(tokens.CreatePreviewToken(id)));
     }
 
     [HttpGet("{id:int}/sections")]

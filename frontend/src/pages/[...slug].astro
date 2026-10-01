@@ -1,6 +1,5 @@
 ---
-import SectionRenderer from '../components/sections/SectionRenderer.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageView from '../components/PageView.astro';
 import { getPublicPage, getPublicSettings } from '../lib/api';
 import { getSiteConfig } from '../lib/settingDefs';
 
@@ -18,13 +17,4 @@ if (!page) return Astro.rewrite('/404');
 // Content is edited in the CMS: let browsers revalidate, and let a CDN serve it briefly.
 Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
 ---
-<BaseLayout
-  site={site}
-  title={page.seo?.metaTitle || page.title}
-  description={page.seo?.metaDescription || page.description}
-  path={requested ? `/${slug}` : '/'}
-  menu={page.menu}
-  seo={page.seo}
->
-  <SectionRenderer sections={page.sections} site={site} />
-</BaseLayout>
+<PageView site={site} page={page} path={requested ? `/${slug}` : '/'} />

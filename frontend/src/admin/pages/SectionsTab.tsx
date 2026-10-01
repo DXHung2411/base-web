@@ -6,6 +6,7 @@ import { sectionDefByType, sectionDefs, type SectionDef } from '../sections/sect
 import type { LandingPage, Section } from '../../types/api';
 import { Button, EmptyState, LoadingBlock, Toggle } from '../ui/controls';
 import { Modal, useConfirm } from '../ui/dialog';
+import { PreviewModal } from '../ui/PreviewModal';
 import { SortableList } from '../ui/SortableList';
 import { useToast } from '../ui/toast';
 
@@ -20,6 +21,7 @@ export function SectionsTab({ page, onChanged }: { page: LandingPage; onChanged:
   const { data: sections, setData, loading, reload } = useLoad(() => api.sections.list(page.id), [page.id]);
   const [picking, setPicking] = useState(false);
   const [editing, setEditing] = useState<EditingState | null>(null);
+  const [preview, setPreview] = useState<{ anchor?: string } | null>(null);
 
   const refresh = async () => {
     await reload();
@@ -72,7 +74,10 @@ export function SectionsTab({ page, onChanged }: { page: LandingPage; onChanged:
     <div>
       <div class="mb-4 flex items-center justify-between gap-3">
         <p class="text-sm text-stone-500">Kéo thả để đổi thứ tự hiển thị trên trang.</p>
-        <Button onClick={() => setPicking(true)}>Thêm section</Button>
+        <div class="flex gap-2">
+          <Button variant="secondary" onClick={() => setPreview({})}>Xem trước</Button>
+          <Button onClick={() => setPicking(true)}>Thêm section</Button>
+        </div>
       </div>
 
       {!sections?.length ? (
@@ -126,12 +131,15 @@ export function SectionsTab({ page, onChanged }: { page: LandingPage; onChanged:
           def={editing.def}
           section={editing.section}
           onClose={() => setEditing(null)}
-          onSaved={() => {
+          onSaved={(saved, showPreview) => {
             setEditing(null);
             void refresh();
+            if (showPreview) setPreview({ anchor: (saved.settings.anchor as string | undefined) || saved.sectionType });
           }}
         />
       )}
+
+      {preview && <PreviewModal pageId={page.id} anchor={preview.anchor} onClose={() => setPreview(null)} />}
     </div>
   );
 }
