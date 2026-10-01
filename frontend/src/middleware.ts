@@ -6,11 +6,18 @@ const compressBrotli = promisify(brotliCompress);
 const compressGzip = promisify(gzip);
 
 /**
- * Compresses HTML responses. The standalone Node server does not do it, and HTML is the largest
- * payload now that CSS is inlined. A reverse proxy in front will leave an already-encoded body alone.
+ * Adds baseline security headers, and compresses HTML responses. The standalone Node server does not
+ * compress, and HTML is the largest payload now that CSS is inlined. A reverse proxy in front will
+ * leave an already-encoded body alone.
  */
 export const onRequest = defineMiddleware(async (context, next) => {
   const response = await next();
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // The admin preview embeds the site from the same origin, so same-origin framing is allowed.
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
   const acceptEncoding = context.request.headers.get('accept-encoding') ?? '';
   const isHtml = response.headers.get('content-type')?.startsWith('text/html');
   if (!isHtml || response.headers.has('content-encoding') || !response.body) return response;

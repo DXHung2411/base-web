@@ -131,6 +131,11 @@ if (configuration.GetValue<bool>("Swagger:Enabled"))
 var app = builder.Build();
 
 app.UseExceptionHandler(_ => { });
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.XContentTypeOptions = "nosniff";
+    await next();
+});
 if (configuration.GetValue<bool>("Swagger:Enabled"))
 {
     app.UseSwagger();
