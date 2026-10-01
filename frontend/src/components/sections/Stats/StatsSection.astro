@@ -1,0 +1,20 @@
+---
+import type { SectionProps } from '../../../types/sections';
+
+type Props = SectionProps<'stats'>;
+const { id, title, settings } = Astro.props;
+const { items = [] } = settings;
+---
+<section id={id} class="bg-ink py-12 text-paper lg:py-14">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    {title && <h2 class="mb-8 font-sans text-caption uppercase text-paper/60">{title}</h2>}
+    <dl class="grid grid-cols-2 gap-x-6 gap-y-9 lg:flex lg:justify-between lg:divide-x lg:divide-paper/15">
+      {items.map((item) => (
+        <div class="flex flex-col-reverse lg:flex-1 lg:px-8 lg:first:pl-0 lg:last:pr-0">
+          <dt class="mt-1 text-small text-paper/70">{item.label}</dt>
+          <dd class="font-serif text-4xl tracking-tight tabular-nums sm:text-5xl">{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

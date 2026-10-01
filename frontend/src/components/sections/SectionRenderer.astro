@@ -1,0 +1,27 @@
+---
+import { sectionComponents } from '../../lib/sectionRegistry';
+import type { SiteConfig } from '../../lib/settingDefs';
+import type { PublicSection } from '../../types/api';
+
+interface Props {
+  sections: PublicSection[];
+  site: SiteConfig;
+}
+
+const { sections, site } = Astro.props;
+
+/** Anchor for in-page links: settings.anchor if set, otherwise the type name (suffixed when repeated). */
+const seen: Record<string, number> = {};
+const items = sections.flatMap((section) => {
+  const Component = sectionComponents[section.sectionType];
+  if (!Component) return [];
+  const count = (seen[section.sectionType] = (seen[section.sectionType] ?? 0) + 1);
+  const anchor = typeof section.settings.anchor === 'string' && section.settings.anchor
+    ? section.settings.anchor
+    : count === 1 ? section.sectionType : `${section.sectionType}-${count}`;
+  return [{ section, Component, anchor }];
+});
+---
+{items.map(({ section, Component, anchor }) => (
+  <Component id={anchor} title={section.title} subtitle={section.subtitle} content={section.content} settings={section.settings} site={site} />
+))}

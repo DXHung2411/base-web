@@ -1,0 +1,80 @@
+---
+import { assetUrl } from '../../lib/assets';
+import type { SiteConfig } from '../../lib/settingDefs';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  site: SiteConfig;
+  menu: { title: string; url: string }[];
+}
+
+const { site, menu } = Astro.props;
+const logo = site['brand.logoUrl'];
+const ctaLabel = site['header.ctaLabel'];
+---
+<header class="sticky top-0 z-40 border-b border-ink/10 bg-paper">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
+    <a href="/" class="shrink-0">
+      {logo ? (
+        <img src={assetUrl(logo)} alt={site['company.name']} class="h-9 w-auto" height="36" />
+      ) : (
+        <span class="font-serif text-xl tracking-tight">{site['company.name']}</span>
+      )}
+    </a>
+
+    {menu.length > 0 && (
+      <nav class="hidden md:block" aria-label="Menu chính">
+        <ul class="flex gap-7 text-small">
+          {menu.map((item) => <li><a href={item.url} class="py-2 transition-colors hover:text-accent">{item.title}</a></li>)}
+        </ul>
+      </nav>
+    )}
+
+    <div class="flex items-center gap-3">
+      {ctaLabel && <Button href={site['header.ctaUrl']} class="hidden sm:inline-flex">{ctaLabel}</Button>}
+      {menu.length > 0 && (
+        <button
+          type="button"
+          id="nav-toggle"
+          class="-mr-2 p-2 md:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Mở menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 8h16M4 16h16" />
+          </svg>
+        </button>
+      )}
+    </div>
+  </div>
+
+  {menu.length > 0 && (
+    <nav id="mobile-nav" class="border-t border-ink/10 md:hidden" aria-label="Menu chính" hidden>
+      <ul class="mx-auto max-w-6xl px-4 py-2 sm:px-6">
+        {menu.map((item) => (
+          <li class="border-b border-ink/10 last:border-0">
+            <a href={item.url} class="block py-3.5 font-serif text-xl">{item.title}</a>
+          </li>
+        ))}
+        {ctaLabel && <li class="py-4"><Button href={site['header.ctaUrl']}>{ctaLabel}</Button></li>}
+      </ul>
+    </nav>
+  )}
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+
+  const setOpen = (open: boolean) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+    if (panel) panel.hidden = !open;
+  };
+
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  panel?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) setOpen(false);
+  });
+</script>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  class?: string;
+  /** "light" for headings on the dark ink background. */
+  tone?: 'default' | 'light';
+}
+
+const { title, subtitle, class: className, tone = 'default' } = Astro.props;
+---
+{(title || subtitle) && (
+  <div class={className}>
+    {title && <h2 class="text-h2">{title}</h2>}
+    {subtitle && <p class:list={['mt-4 max-w-prose text-lead', tone === 'light' ? 'text-paper/70' : 'text-ink/70']}>{subtitle}</p>}
+  </div>
+)}

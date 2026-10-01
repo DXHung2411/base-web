@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/newsreader/wght.css';
+@import '@fontsource-variable/newsreader/wght-italic.css';
+@import '@fontsource/be-vietnam-pro/400.css';
+@import '@fontsource/be-vietnam-pro/500.css';
+@import '@fontsource/be-vietnam-pro/600.css';
+
+/*
+ * Design tokens. --theme-* variables are injected per request from the theme settings
+ * (see src/lib/theme.ts), so colors, fonts and radius are edited in the admin, not here.
+ */
+@theme inline {
+  --color-accent: var(--theme-primary);
+  --color-muted: var(--theme-secondary);
+  --color-paper: var(--theme-bg);
+  --color-ink: var(--theme-text);
+  --font-sans: var(--theme-font);
+  --font-serif: var(--theme-heading-font);
+
+  /* One base radius; buttons and fields use it as is, images are slightly softer. */
+  --radius-ui: var(--theme-radius);
+  --radius-media: calc(var(--theme-radius) * 1.5);
+
+  /* Type scale: every step has its own line-height and tracking. */
+  --text-display: clamp(2.5rem, 1.7rem + 3.2vw, 3.9rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.022em;
+  --text-h2: clamp(1.75rem, 1.35rem + 1.5vw, 2.5rem);
+  --text-h2--line-height: 1.14;
+  --text-h2--letter-spacing: -0.014em;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.005em;
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.55;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.08em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    font-family: var(--theme-font);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--theme-heading-font);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--theme-primary);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* FAQ: native <details>, with a plus/minus marker instead of the default triangle. */
+  .faq-item summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--theme-primary);
+  }
+  .faq-item[open] summary::after {
+    content: '\2212';
+  }
+
+  /* Free-form HTML from the "custom" section. */
+  .prose-custom > * + * {
+    margin-top: 1.1em;
+  }
+  .prose-custom h2,
+  .prose-custom h3 {
+    margin-top: 1.8em;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+  .prose-custom a {
+    color: var(--theme-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-custom ul,
+  .prose-custom ol {
+    padding-left: 1.25em;
+  }
+  .prose-custom ul {
+    list-style: disc;
+  }
+  .prose-custom ol {
+    list-style: decimal;
+  }
+  .prose-custom img {
+    border-radius: calc(var(--theme-radius) * 1.5);
+  }
+}
+
+/* The only entrance animation on the site: the hero fades in once, on load. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@utility rise {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0ms);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

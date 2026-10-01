@@ -6,7 +6,7 @@ import { Button, Field, TextInput, Textarea, Toggle } from '../ui/controls';
 import { Modal } from '../ui/dialog';
 import { useToast } from '../ui/toast';
 import { FieldsEditor } from './FieldsEditor';
-import type { SectionDef } from './sectionDefs';
+import { anchorField, type SectionDef } from './sectionDefs';
 
 interface SectionEditorProps {
   pageId: number;
@@ -66,7 +66,7 @@ export function SectionEditor({ pageId, def, section, onSaved, onClose }: Sectio
             <Textarea rows={def.type === 'custom' ? 10 : 6} value={content} onInput={(e) => setContent(e.currentTarget.value)} />
           </Field>
         )}
-        <FieldsEditor fields={def.settings} value={settings} onChange={setSettings} />
+        <FieldsEditor fields={[...def.settings, anchorField]} value={settings} onChange={setSettings} />
         <label class="flex items-center gap-3 text-sm text-stone-800">
           <Toggle checked={isVisible} onChange={setIsVisible} label="Hiển thị section" />
           Hiển thị trên website

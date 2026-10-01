@@ -23,6 +23,12 @@ export interface SectionDef {
   defaults: { title?: string; subtitle?: string; content?: string; settings: Record<string, unknown> };
 }
 
+/** Shared by every section type: the in-page anchor menu links point at. */
+export const anchorField: Field = {
+  kind: 'text', key: 'anchor', label: 'Neo liên kết (anchor)',
+  hint: 'Dùng cho liên kết menu, ví dụ "gia-tiec" thì liên kết là #gia-tiec. Để trống để dùng tên loại section.',
+};
+
 const imageFields = (): Field[] => [{ kind: 'image', key: 'image', label: 'Ảnh' }];
 
 export const sectionDefs: SectionDef[] = [
@@ -228,6 +234,36 @@ export const sectionDefs: SectionDef[] = [
         hint: 'URL nhận dữ liệu form (ví dụ Formspree). Để trống nếu chỉ muốn hiển thị thông tin liên hệ.',
       },
       { kind: 'text', key: 'submitLabel', label: 'Nhãn nút gửi', placeholder: 'Gửi thông tin' },
+      {
+        kind: 'list', key: 'fields', label: 'Các ô nhập trong biểu mẫu', itemTitleKey: 'label', addLabel: 'Thêm ô nhập',
+        fields: [
+          { kind: 'text', key: 'label', label: 'Nhãn' },
+          { kind: 'text', key: 'name', label: 'Tên trường (không dấu, ví dụ: phone)' },
+          {
+            kind: 'select', key: 'type', label: 'Kiểu',
+            options: [
+              { value: 'text', label: 'Văn bản' }, { value: 'tel', label: 'Số điện thoại' }, { value: 'email', label: 'Email' },
+              { value: 'date', label: 'Ngày' }, { value: 'textarea', label: 'Văn bản nhiều dòng' },
+            ],
+          },
+          { kind: 'boolean', key: 'required', label: 'Bắt buộc' },
+        ],
+      },
+      {
+        kind: 'list', key: 'fields', label: 'Các ô nhập trong biểu mẫu', itemTitleKey: 'label', addLabel: 'Thêm ô nhập',
+        fields: [
+          { kind: 'text', key: 'label', label: 'Nhãn' },
+          { kind: 'text', key: 'name', label: 'Tên trường (không dấu, ví dụ: phone)' },
+          {
+            kind: 'select', key: 'type', label: 'Kiểu',
+            options: [
+              { value: 'text', label: 'Văn bản' }, { value: 'tel', label: 'Số điện thoại' }, { value: 'email', label: 'Email' },
+              { value: 'date', label: 'Ngày' }, { value: 'textarea', label: 'Văn bản nhiều dòng' },
+            ],
+          },
+          { kind: 'boolean', key: 'required', label: 'Bắt buộc' },
+        ],
+      },
     ],
     defaults: { title: 'Liên hệ', settings: {} },
   },

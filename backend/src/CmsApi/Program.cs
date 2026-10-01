@@ -29,6 +29,7 @@ services.AddDbContext<AppDbContext>(options =>
 
 services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 services.AddScoped<DbSeeder>();
+services.AddScoped<DemoContentSeeder>();
 services.AddSingleton<TokenService>();
 services.AddScoped<AuthService>();
 services.AddScoped<LandingPageService>();
@@ -163,6 +164,8 @@ if (configuration.GetValue<bool>("Database:MigrateAndSeedOnStartup"))
     using var scope = app.Services.CreateScope();
     await scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.MigrateAsync();
     await scope.ServiceProvider.GetRequiredService<DbSeeder>().SeedAsync();
+    if (configuration.GetValue<bool>("Seed:DemoContent"))
+        await scope.ServiceProvider.GetRequiredService<DemoContentSeeder>().SeedAsync();
 }
 
 app.Run();

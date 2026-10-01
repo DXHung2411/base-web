@@ -85,6 +85,7 @@ export interface ContactSettings {
   /** Endpoint that receives the form POST (Formspree, Google Apps Script, your own API...). */
   formAction?: string;
   submitLabel?: string;
+  fields?: { name: string; label: string; type?: 'text' | 'tel' | 'email' | 'date' | 'textarea'; required?: boolean }[];
 }
 
 export interface CustomSettings {

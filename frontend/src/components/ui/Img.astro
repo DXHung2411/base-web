@@ -1,0 +1,26 @@
+---
+import { assetUrl } from '../../lib/assets';
+
+interface Props {
+  src: string;
+  alt?: string;
+  /** Intrinsic size hint so the browser reserves space; CSS aspect classes decide the rendered crop. */
+  width: number;
+  height: number;
+  /** Above-the-fold image: loaded immediately with high priority. */
+  eager?: boolean;
+  class?: string;
+}
+
+const { src, alt = '', width, height, eager = false, class: className } = Astro.props;
+---
+<img
+  src={assetUrl(src)}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+  fetchpriority={eager ? 'high' : undefined}
+  class:list={['w-full bg-muted/15 object-cover', className]}
+/>

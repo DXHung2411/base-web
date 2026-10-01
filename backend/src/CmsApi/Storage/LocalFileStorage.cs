@@ -16,7 +16,7 @@ public sealed class LocalFileStorage(IOptions<StorageOptions> options, IHostEnvi
     {
         var fullPath = ResolveInsideRoot(relativePath);
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
-        await using var target = new FileStream(fullPath, FileMode.CreateNew, FileAccess.Write);
+        await using var target = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
         await content.CopyToAsync(target, ct);
         return $"{RequestPath}/{relativePath}";
     }

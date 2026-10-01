@@ -1,0 +1,39 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'testimonials'>;
+const { id, title, subtitle, settings } = Astro.props;
+const { items = [] } = settings;
+const [featured, ...others] = items;
+---
+<section id={id} class="py-20 lg:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading title={title} subtitle={subtitle} class="mb-12 max-w-2xl" />
+    {featured && (
+      <div class="grid gap-12 lg:grid-cols-12">
+        <figure class="lg:col-span-7">
+          <blockquote class="font-serif text-2xl leading-snug sm:text-3xl">“{featured.quote}”</blockquote>
+          <figcaption class="mt-5 text-small">
+            <span class="font-medium">{featured.name}</span>
+            {featured.detail && <span class="text-muted"> · {featured.detail}</span>}
+          </figcaption>
+        </figure>
+        {others.length > 0 && (
+          <ul class="divide-y divide-ink/15 border-y border-ink/15 lg:col-span-4 lg:col-start-9">
+            {others.map((item) => (
+              <li class="py-5">
+                <figure>
+                  <blockquote class="text-small text-ink/80">{item.quote}</blockquote>
+                  <figcaption class="mt-2 text-caption text-muted">
+                    {item.name}{item.detail && ` · ${item.detail}`}
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    )}
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import Img from '../../ui/Img.astro';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'gallery'>;
+const { id, title, subtitle, settings } = Astro.props;
+const { images = [] } = settings;
+
+// Columns balance themselves for any number of images; mixed crops keep the rhythm uneven on purpose.
+const crops = [
+  { ratio: 'aspect-[4/5]', width: 800, height: 1000 },
+  { ratio: 'aspect-[4/3]', width: 1000, height: 750 },
+  { ratio: 'aspect-square', width: 900, height: 900 },
+  { ratio: 'aspect-[3/4]', width: 750, height: 1000 },
+  { ratio: 'aspect-[5/4]', width: 1000, height: 800 },
+];
+---
+<section id={id} class="py-16 lg:py-20">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading title={title} subtitle={subtitle} class="mb-10 max-w-2xl" />
+    <ul class="columns-2 gap-2 sm:gap-3 lg:columns-3">
+      {images.map((image, index) => {
+        const crop = crops[index % crops.length];
+        return (
+          <li class="mb-2 break-inside-avoid sm:mb-3">
+            <Img src={image.src} alt={image.alt} width={crop.width} height={crop.height} class:list={['rounded-media', crop.ratio]} />
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

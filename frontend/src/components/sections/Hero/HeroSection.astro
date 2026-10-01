@@ -1,0 +1,47 @@
+---
+import { paragraphs } from '../../../lib/text';
+import type { SectionProps } from '../../../types/sections';
+import Button from '../../ui/Button.astro';
+import Img from '../../ui/Img.astro';
+
+type Props = SectionProps<'hero'>;
+const { id, title, subtitle, content, settings } = Astro.props;
+const { eyebrow, image, primaryCta, secondaryCta, facts = [] } = settings;
+---
+<section id={id} class="pt-10 pb-16 sm:pt-14 lg:pt-16 lg:pb-24">
+  <div class="mx-auto grid max-w-6xl gap-x-12 gap-y-8 px-4 sm:px-6 lg:grid-cols-12 lg:grid-rows-[auto_1fr]">
+    <header class="rise lg:col-span-7 lg:row-start-1">
+      {eyebrow && <p class="mb-5 text-caption uppercase text-muted">{eyebrow}</p>}
+      <h1 class="text-display">{title}</h1>
+    </header>
+
+    {image?.src && (
+      <figure class="rise lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:mt-12" style="--delay: 120ms">
+        <Img src={image.src} alt={image.alt} width={800} height={1000} eager class="aspect-[4/3] rounded-media lg:aspect-[4/5]" />
+      </figure>
+    )}
+
+    <div class="rise lg:col-span-6 lg:row-start-2" style="--delay: 80ms">
+      {subtitle && <p class="text-lead text-ink/80">{subtitle}</p>}
+      {paragraphs(content).map((text) => <p class="mt-4 max-w-prose text-ink/70">{text}</p>)}
+
+      {(primaryCta?.label || secondaryCta?.label) && (
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          {primaryCta?.label && <Button href={primaryCta.href}>{primaryCta.label}</Button>}
+          {secondaryCta?.label && <Button href={secondaryCta.href} variant="link">{secondaryCta.label}</Button>}
+        </div>
+      )}
+
+      {facts.length > 0 && (
+        <dl class="mt-10 grid border-t border-ink/15 sm:grid-cols-3 sm:gap-6 sm:pt-6">
+          {facts.map((fact) => (
+            <div class="flex items-baseline justify-between gap-4 border-b border-ink/10 py-3 sm:block sm:border-0 sm:py-0">
+              <dt class="text-caption uppercase text-muted">{fact.label}</dt>
+              <dd class="font-serif text-xl sm:mt-1">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+  </div>
+</section>

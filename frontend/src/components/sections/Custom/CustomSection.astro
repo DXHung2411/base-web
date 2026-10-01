@@ -1,0 +1,15 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'custom'>;
+const { id, title, subtitle, content, settings } = Astro.props;
+const width = settings.width === 'wide' ? 'max-w-6xl' : 'max-w-2xl';
+---
+<section id={id} class="py-16 lg:py-20">
+  <div class:list={['mx-auto px-4 sm:px-6', width]}>
+    <SectionHeading title={title} subtitle={subtitle} class="mb-8" />
+    {/* HTML is entered by authenticated admins, so it is rendered as is. */}
+    {content && <div class="prose-custom" set:html={content} />}
+  </div>
+</section>

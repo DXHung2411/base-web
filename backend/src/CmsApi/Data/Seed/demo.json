@@ -1,0 +1,218 @@
+{
+  "settings": {
+    "company.name": "Vọng Nguyệt",
+    "company.tagline": "Nhà hàng tiệc cưới và sự kiện tại Phú Nhuận, TP. Hồ Chí Minh.",
+    "company.phone": "0900 000 000",
+    "company.email": "dattiec@vongnguyet.example",
+    "company.address": "128 Đại lộ Hoa Sữa, Phường 7\nQuận Phú Nhuận, TP. Hồ Chí Minh",
+    "company.hours": "Hằng ngày, 9:00 – 21:00",
+    "social.facebook": "https://facebook.com/",
+    "social.zalo": "https://zalo.me/0900000000",
+    "site.homeSlug": "home",
+    "header.ctaLabel": "Đặt lịch xem sảnh",
+    "header.ctaUrl": "#lien-he",
+    "footer.text": "© 2026 Vọng Nguyệt. Tên, số liệu và hình ảnh trên trang này là dữ liệu mẫu."
+  },
+  "page": {
+    "name": "Trang chủ",
+    "slug": "home",
+    "title": "Vọng Nguyệt · Sảnh tiệc cưới tại Phú Nhuận",
+    "description": "Ba sảnh tiệc từ 150 đến 700 khách, bếp riêng và một người điều phối làm việc cùng bạn từ lần xem sảnh đầu tiên."
+  },
+  "seo": {
+    "metaTitle": "Vọng Nguyệt | Nhà hàng tiệc cưới tại Phú Nhuận, TP.HCM",
+    "metaDescription": "Ba sảnh tiệc từ 150 đến 700 khách, nấu thử thực đơn miễn phí, báo giá ghi rõ từng khoản. Hẹn xem sảnh hằng ngày từ 9:00 đến 20:00.",
+    "keywords": "tiệc cưới, nhà hàng tiệc cưới, sảnh tiệc Phú Nhuận"
+  },
+  "menu": [
+    { "title": "Giới thiệu", "url": "#gioi-thieu" },
+    { "title": "Sảnh tiệc", "url": "#sanh-tiec" },
+    { "title": "Thực đơn", "url": "#thuc-don" },
+    { "title": "Bảng giá", "url": "#bang-gia" },
+    { "title": "Hỏi đáp", "url": "#hoi-dap" },
+    { "title": "Liên hệ", "url": "#lien-he" }
+  ],
+  "sections": [
+    {
+      "sectionType": "hero",
+      "title": "Một buổi tối đủ chỗ cho cả hai gia đình",
+      "subtitle": "Ba sảnh từ 150 đến 700 khách, bếp riêng, và một người điều phối đi cùng bạn từ lần xem sảnh đầu tiên đến khi đóng cửa tiệc.",
+      "settings": {
+        "anchor": "dau-trang",
+        "eyebrow": "Nhà hàng tiệc cưới · Phú Nhuận, TP.HCM",
+        "image": { "src": "@hero.svg", "alt": "Hàng cửa vòm của sảnh tiệc dưới ánh đèn vàng" },
+        "primaryCta": { "label": "Đặt lịch xem sảnh", "href": "#lien-he" },
+        "secondaryCta": { "label": "Xem bảng giá", "href": "#bang-gia" },
+        "facts": [
+          { "label": "Sức chứa", "value": "150 – 700 khách" },
+          { "label": "Mở cửa", "value": "9:00 – 21:00" },
+          { "label": "Bãi xe", "value": "120 chỗ ô tô" }
+        ]
+      }
+    },
+    {
+      "sectionType": "about",
+      "title": "Bắt đầu từ một căn bếp nhỏ",
+      "content": "Năm 2011, vợ chồng chủ nhà hàng mở một quán cơm tiệc mười hai bàn trên con đường này. Khách đến vì món ăn, rồi giới thiệu lại cho người quen đang chuẩn bị cưới.\n\nSau mười ba năm, quán trở thành ba sảnh tiệc. Chúng tôi giữ lại hai thứ: bếp trưởng ban đầu vẫn đứng bếp, và thực đơn vẫn được nấu thử cho từng gia đình trước khi chốt.\n\nMột đám cưới chỉ diễn ra một lần, nên chúng tôi nhận ít lịch hơn mức sảnh có thể chứa: tối đa hai tiệc mỗi ngày, cách nhau ít nhất ba tiếng.",
+      "settings": {
+        "anchor": "gioi-thieu",
+        "image": { "src": "@about.svg", "alt": "Bàn tiệc nhìn từ trên xuống" },
+        "quote": "Khách mời thường nhớ món ăn trước khi nhớ cái sảnh.",
+        "quoteAuthor": "Bếp trưởng Hòa, người đứng bếp từ năm 2011",
+        "highlights": [
+          "Tối đa hai tiệc mỗi ngày, cách nhau ba tiếng",
+          "Hải sản và thịt nhập trong ngày, không dùng hàng đông lạnh cho món chính",
+          "Nấu thử thực đơn miễn phí với tiệc từ 20 bàn"
+        ]
+      }
+    },
+    {
+      "sectionType": "services",
+      "title": "Ba sảnh và một khoảng sân",
+      "subtitle": "Mỗi không gian có sức chứa và cách bố trí riêng. Chúng tôi sẽ gợi ý sảnh phù hợp sau khi biết số khách thực tế.",
+      "settings": {
+        "anchor": "sanh-tiec",
+        "items": [
+          { "title": "Sảnh Nguyệt Quế", "description": "Đến 700 khách, 70 bàn. Sân khấu rộng 12 m, màn hình LED 8 m.", "image": { "src": "@hall-nguyet-que.svg", "alt": "Sơ đồ bàn tiệc sảnh Nguyệt Quế" } },
+          { "title": "Sảnh Mai Vàng", "description": "Đến 400 khách, 40 bàn. Trần cao 6 m, cửa sổ lớn nhìn ra sân.", "image": { "src": "@hall-mai-vang.svg", "alt": "Sơ đồ bàn tiệc sảnh Mai Vàng" } },
+          { "title": "Sảnh Trúc Xanh", "description": "150 – 250 khách. Dành cho tiệc thân mật, bố trí bàn dài theo yêu cầu.", "image": { "src": "@hall-truc-xanh.svg", "alt": "Sơ đồ bàn tiệc sảnh Trúc Xanh" } },
+          { "title": "Sân vườn", "description": "Tổ chức lễ gia tiên và đón khách ngoài trời, tối đa 200 người đứng.", "image": { "src": "@garden.svg", "alt": "Khoảng sân vườn với hàng cây" } }
+        ]
+      }
+    },
+    {
+      "sectionType": "stats",
+      "settings": {
+        "items": [
+          { "value": "13", "label": "năm hoạt động" },
+          { "value": "2.400+", "label": "đám cưới đã tổ chức" },
+          { "value": "3", "label": "sảnh tiệc và một sân vườn" },
+          { "value": "120", "label": "chỗ đỗ ô tô" }
+        ]
+      }
+    },
+    {
+      "sectionType": "features",
+      "title": "Cách chúng tôi làm việc",
+      "subtitle": "Những việc nhỏ, làm đều tay, để ngày cưới ít bất ngờ nhất có thể.",
+      "settings": {
+        "anchor": "cach-lam-viec",
+        "items": [
+          { "title": "Một người điều phối từ đầu đến cuối", "description": "Bạn làm việc với cùng một người từ lúc xem sảnh, chốt thực đơn đến buổi tổng duyệt. Không phải kể lại từ đầu mỗi lần gọi." },
+          { "title": "Báo giá ghi rõ từng khoản", "description": "Giá bàn, nước uống, trang trí, âm thanh ánh sáng và phí phát sinh đều có dòng riêng. Phần nào tính thêm, chúng tôi nói trước khi ký." },
+          { "title": "Nấu thử trước khi chốt", "description": "Với tiệc từ 20 bàn, gia đình được dùng thử toàn bộ thực đơn dự kiến cho 6 người. Món nào chưa hợp thì đổi." },
+          { "title": "Tổng duyệt hai ngày trước", "description": "Chạy thử chương trình, âm thanh, ánh sáng và đón khách cùng MC. Cô dâu chú rể không cần có mặt." }
+        ]
+      }
+    },
+    {
+      "sectionType": "products",
+      "title": "Ba thực đơn tham khảo",
+      "subtitle": "Giá tính theo bàn 10 người. Thực đơn được điều chỉnh theo khẩu vị và kiêng kỵ của gia đình.",
+      "settings": {
+        "anchor": "thuc-don",
+        "items": [
+          { "name": "Thực đơn Mai", "price": "6.900.000đ", "description": "Gỏi ngó sen tôm thịt\nSúp cua gà xé\nGà quay lá chanh\nCá diêu hồng hấp xì dầu\nLẩu hải sản\nCơm chiên Dương Châu\nChè hạt sen long nhãn", "image": { "src": "@menu-1.svg", "alt": "Bàn ăn thực đơn Mai nhìn từ trên xuống" } },
+          { "name": "Thực đơn Lan", "price": "7.900.000đ", "description": "Khai vị năm món nguội\nSúp hải sản vi cá\nTôm sú nướng muối ớt\nBò hầm vang\nCá chình nướng\nXôi gấc\nTrái cây theo mùa", "image": { "src": "@menu-2.svg", "alt": "Bàn ăn thực đơn Lan nhìn từ trên xuống" } },
+          { "name": "Thực đơn Cúc", "price": "9.500.000đ", "description": "Khai vị sáu món nguội\nSúp bào ngư\nTôm hùm nướng bơ tỏi\nSườn cừu nướng\nCá mú hấp Hồng Kông\nLẩu nấm hải sản\nTráng miệng ba món", "image": { "src": "@menu-3.svg", "alt": "Bàn ăn thực đơn Cúc nhìn từ trên xuống" } }
+        ]
+      }
+    },
+    {
+      "sectionType": "gallery",
+      "title": "Một vài buổi tiệc gần đây",
+      "settings": {
+        "anchor": "hinh-anh",
+        "images": [
+          { "src": "@gallery-1.svg", "alt": "Sân khấu với cổng vòm và hoa hai bên" },
+          { "src": "@gallery-2.svg", "alt": "Lối đi trải thảm đỏ giữa hai dãy ghế" },
+          { "src": "@gallery-3.svg", "alt": "Bánh cưới ba tầng" },
+          { "src": "@gallery-4.svg", "alt": "Hàng đèn lồng treo trần" },
+          { "src": "@gallery-5.svg", "alt": "Sơ đồ bàn tiệc nhìn từ trên" },
+          { "src": "@gallery-6.svg", "alt": "Hàng cửa vòm sảnh tiệc" },
+          { "src": "@gallery-7.svg", "alt": "Bộ đồ ăn trên bàn tiệc" }
+        ]
+      }
+    },
+    {
+      "sectionType": "testimonials",
+      "title": "Khách hàng nói gì sau tiệc",
+      "settings": {
+        "anchor": "y-kien",
+        "items": [
+          { "quote": "Mẹ mình đi qua từng bàn hỏi khách có đủ món không, và lần nào chị điều phối cũng đã nhắc nhân viên từ trước. Cả hai bên gia đình ngồi trọn buổi tiệc, điều mà bọn mình không dám mong.", "name": "Ngọc Anh & Quốc Bảo", "detail": "Tiệc tối, tháng 3/2026, sảnh Nguyệt Quế" },
+          { "quote": "Báo giá nhận về khớp đến từng đồng với hóa đơn cuối.", "name": "Thanh Vy", "detail": "Sảnh Mai Vàng, 2025" },
+          { "quote": "Bọn mình đổi hai món sau buổi nấu thử, và hôm tiệc đúng như đã chốt.", "name": "Minh Khôi & Hà Linh", "detail": "Sảnh Trúc Xanh, 2025" },
+          { "quote": "Sân vườn làm lễ gia tiên rất vừa. Trời mưa thì họ dời vào sảnh trong mười phút.", "name": "Đức Thịnh", "detail": "Sân vườn và sảnh Mai Vàng, 2026" }
+        ]
+      }
+    },
+    {
+      "sectionType": "pricing",
+      "title": "Giá theo khung giờ",
+      "subtitle": "Giá tính trên mỗi bàn 10 người, đã gồm sảnh và trang trí cơ bản, chưa gồm thuế VAT.",
+      "settings": {
+        "anchor": "bang-gia",
+        "note": "Giá có thể thay đổi theo mùa cưới (tháng 10 đến tháng 12). Báo giá chính thức được gửi bằng văn bản sau khi xem sảnh.",
+        "plans": [
+          {
+            "name": "Tiệc trưa ngày thường", "description": "Thứ Hai đến thứ Sáu, 10:30 – 14:00", "price": "từ 6.200.000đ", "unit": "/ bàn",
+            "features": ["Miễn phí thuê sảnh", "Trang trí cổng và bàn gallery cơ bản", "Ba chai nước ngọt hoặc bia mỗi bàn"],
+            "cta": { "label": "Hỏi lịch trống", "href": "#lien-he" }
+          },
+          {
+            "name": "Tiệc tối ngày thường", "description": "Thứ Hai đến thứ Sáu, 17:30 – 21:30", "price": "từ 6.800.000đ", "unit": "/ bàn",
+            "features": ["Miễn phí thuê sảnh", "Sân khấu LED và MC của nhà hàng", "Phòng chờ cô dâu chú rể"],
+            "cta": { "label": "Hỏi lịch trống", "href": "#lien-he" }
+          },
+          {
+            "name": "Tiệc tối cuối tuần và ngày lễ", "description": "Thứ Bảy, Chủ nhật và ngày lễ, 17:30 – 21:30", "price": "từ 7.400.000đ", "unit": "/ bàn", "highlighted": true,
+            "features": ["Sân khấu LED và MC của nhà hàng", "Tổng duyệt hai ngày trước", "Phòng chờ cô dâu chú rể", "Tặng một bàn cho gia đình hai bên khi đặt từ 40 bàn"],
+            "cta": { "label": "Hỏi lịch trống", "href": "#lien-he" }
+          }
+        ]
+      }
+    },
+    {
+      "sectionType": "faq",
+      "title": "Những câu hỏi hay gặp",
+      "settings": {
+        "anchor": "hoi-dap",
+        "items": [
+          { "question": "Cần đặt cọc bao nhiêu để giữ ngày?", "answer": "Đặt cọc 30% giá trị dự kiến của tiệc. Nếu hủy trước 60 ngày, chúng tôi hoàn lại toàn bộ; từ 30 đến 60 ngày hoàn 50%." },
+          { "question": "Có thể thay đổi số bàn sau khi chốt không?", "answer": "Có. Bạn được tăng hoặc giảm tới 10% số bàn, không tính phụ phí, nếu báo trước tiệc 7 ngày. Số bàn chính thức được chốt 3 ngày trước tiệc." },
+          { "question": "Có được mang rượu và bánh cưới từ ngoài vào không?", "answer": "Rượu mang vào tính phí mở nút 150.000đ mỗi chai. Bánh cưới và hoa tươi mang vào không tính phí." },
+          { "question": "Nhà hàng có phục vụ món chay hoặc kiêng cữ không?", "answer": "Có. Hãy báo trước buổi nấu thử để bếp chuẩn bị riêng, thường là một đến hai bàn." },
+          { "question": "Nên xem sảnh vào lúc nào?", "answer": "Hằng ngày từ 9:00 đến 20:00, nên hẹn trước một ngày. Nếu muốn thấy sảnh khi đang có tiệc, hãy đến vào tối cuối tuần." },
+          { "question": "Có chỗ đỗ xe không?", "answer": "Có 120 chỗ ô tô và khu để xe máy riêng, có nhân viên dẫn xe." }
+        ]
+      }
+    },
+    {
+      "sectionType": "cta",
+      "title": "Ghé xem sảnh vào một buổi tối cuối tuần",
+      "subtitle": "Bạn sẽ thấy sảnh đang vận hành thật, nói chuyện với người điều phối và uống một ly nước cùng chúng tôi. Không cần đặt cọc.",
+      "settings": {
+        "primaryCta": { "label": "Hẹn lịch xem sảnh", "href": "#lien-he" },
+        "secondaryCta": { "label": "Gọi 0900 000 000", "href": "tel:0900000000" },
+        "note": "Xin hẹn trước ít nhất một ngày."
+      }
+    },
+    {
+      "sectionType": "contact",
+      "title": "Để lại số điện thoại, chúng tôi gọi lại trong ngày",
+      "subtitle": "Hoặc gọi trực tiếp trong giờ làm việc.",
+      "settings": {
+        "anchor": "lien-he",
+        "formAction": "mailto:dattiec@vongnguyet.example",
+        "submitLabel": "Gửi yêu cầu",
+        "fields": [
+          { "name": "name", "label": "Họ tên", "type": "text", "required": true },
+          { "name": "phone", "label": "Số điện thoại", "type": "tel", "required": true },
+          { "name": "date", "label": "Ngày dự kiến tổ chức", "type": "date" },
+          { "name": "message", "label": "Lời nhắn", "type": "textarea" }
+        ]
+      }
+    }
+  ]
+}

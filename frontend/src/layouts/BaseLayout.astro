@@ -1,0 +1,75 @@
+---
+import Footer from '../components/Footer/Footer.astro';
+import Header from '../components/Header/Header.astro';
+import { assetUrl } from '../lib/assets';
+import type { SiteConfig } from '../lib/settingDefs';
+import { themeToCss } from '../lib/theme';
+import '../styles/site.css';
+
+interface Props {
+  site: SiteConfig;
+  title: string;
+  description?: string;
+  /** Path of this page on the site, used for the default canonical URL ("/" for the home page). */
+  path: string;
+  menu: { title: string; url: string }[];
+  seo?: { keywords?: string; ogImage?: string; canonicalUrl?: string };
+  noindex?: boolean;
+}
+
+const { site, title, description, path, menu, seo, noindex = false } = Astro.props;
+
+const origin = Astro.site!;
+const canonical = seo?.canonicalUrl || new URL(path, origin).href;
+const ogImage = seo?.ogImage ? new URL(assetUrl(seo.ogImage), origin).href : undefined;
+const favicon = assetUrl(site['brand.faviconUrl']);
+const phone = site['company.phone'];
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site['company.name'],
+  url: origin.href,
+  ...(site['brand.logoUrl'] && { logo: new URL(assetUrl(site['brand.logoUrl']), origin).href }),
+  ...(phone && { telephone: phone }),
+  ...(site['company.email'] && { email: site['company.email'] }),
+  ...(site['company.address'] && { address: site['company.address'].replace(/\n/g, ', ') }),
+};
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {seo?.keywords && <meta name="keywords" content={seo.keywords} />}
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <meta name="theme-color" content={site['theme.primaryColor']} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={favicon} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:site_name" content={site['company.name']} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <style set:html={themeToCss(site)}></style>
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-paper focus:p-3">Chuyển đến nội dung</a>
+    <Header site={site} menu={menu} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer site={site} menu={menu} />
+  </body>
+</html>

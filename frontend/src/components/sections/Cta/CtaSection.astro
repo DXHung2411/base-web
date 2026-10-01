@@ -1,0 +1,19 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import Button from '../../ui/Button.astro';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'cta'>;
+const { id, title, subtitle, settings } = Astro.props;
+const { primaryCta, secondaryCta, note } = settings;
+---
+<section id={id} class="bg-ink py-20 text-paper lg:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading title={title} subtitle={subtitle} tone="light" class="max-w-3xl [&_h2]:text-[clamp(2rem,1.4rem+2.4vw,3.25rem)]" />
+    <div class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+      {primaryCta?.label && <Button href={primaryCta.href} variant="inverse">{primaryCta.label}</Button>}
+      {secondaryCta?.label && <Button href={secondaryCta.href} variant="link" class="text-paper">{secondaryCta.label}</Button>}
+    </div>
+    {note && <p class="mt-6 text-small text-paper/60">{note}</p>}
+  </div>
+</section>

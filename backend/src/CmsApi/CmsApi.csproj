@@ -16,4 +16,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Data\Seed\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

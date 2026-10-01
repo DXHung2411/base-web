@@ -1,7 +1,6 @@
 import { useState } from 'preact/hooks';
 import { api } from '../api';
 import { errorMessage, useLoad } from '../hooks';
-import { FieldsEditor } from '../sections/FieldsEditor';
 import { SectionEditor } from '../sections/SectionEditor';
 import { sectionDefByType, sectionDefs, type SectionDef } from '../sections/sectionDefs';
 import type { LandingPage, Section } from '../../types/api';

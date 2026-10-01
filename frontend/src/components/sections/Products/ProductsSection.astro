@@ -1,0 +1,28 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import Img from '../../ui/Img.astro';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'products'>;
+const { id, title, subtitle, settings } = Astro.props;
+const { items = [] } = settings;
+---
+<section id={id} class="py-20 lg:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading title={title} subtitle={subtitle} class="mb-12 max-w-2xl" />
+    <ul class="grid gap-x-14 gap-y-12 md:grid-cols-2">
+      {items.map((item) => (
+        <li class:list={['grid gap-5', item.image?.src && 'grid-cols-[6.5rem_1fr] sm:grid-cols-[9rem_1fr]']}>
+          {item.image?.src && <Img src={item.image.src} alt={item.image.alt} width={360} height={360} class="aspect-square rounded-media" />}
+          <div>
+            <div class="flex items-baseline justify-between gap-4 border-b border-ink/15 pb-2">
+              <h3 class="text-h3">{item.name}</h3>
+              {item.price && <p class="shrink-0 font-serif text-lg text-accent">{item.price}</p>}
+            </div>
+            {item.description && <p class="mt-3 whitespace-pre-line text-small text-ink/70">{item.description}</p>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

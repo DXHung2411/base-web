@@ -1,0 +1,69 @@
+---
+import type { SiteConfig } from '../../../lib/settingDefs';
+import { telHref } from '../../../lib/text';
+import type { SectionProps } from '../../../types/sections';
+import Button from '../../ui/Button.astro';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+interface Props extends SectionProps<'contact'> {
+  site: SiteConfig;
+}
+
+const { id, title, subtitle, settings, site } = Astro.props;
+const { formAction, submitLabel = 'Gửi', fields = [] } = settings;
+
+const phone = site['company.phone'];
+const info = [
+  ['Địa chỉ', site['company.address']],
+  ['Giờ làm việc', site['company.hours']],
+].filter(([, value]) => value);
+
+const fieldClass = 'mt-1 block w-full rounded-ui border-0 border-b border-ink/30 bg-transparent px-0 py-2 placeholder:text-ink/40 focus:border-accent focus:outline-none';
+---
+<section id={id} class="py-20 lg:py-28">
+  <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <SectionHeading title={title} subtitle={subtitle} />
+      <dl class="mt-8 space-y-5 text-small">
+        {info.map(([label, value]) => (
+          <div>
+            <dt class="text-caption uppercase text-muted">{label}</dt>
+            <dd class="mt-1 whitespace-pre-line">{value}</dd>
+          </div>
+        ))}
+        {phone && (
+          <div>
+            <dt class="text-caption uppercase text-muted">Điện thoại</dt>
+            <dd class="mt-1 font-serif text-2xl"><a href={telHref(phone)} class="hover:text-accent">{phone}</a></dd>
+          </div>
+        )}
+        {site['company.email'] && (
+          <div>
+            <dt class="text-caption uppercase text-muted">Email</dt>
+            <dd class="mt-1"><a href={`mailto:${site['company.email']}`} class="underline decoration-1 underline-offset-4 hover:text-accent">{site['company.email']}</a></dd>
+          </div>
+        )}
+      </dl>
+    </div>
+
+    <div class="lg:col-span-6 lg:col-start-7">
+      {formAction && fields.length > 0 ? (
+        <form action={formAction} method="post" enctype={formAction.startsWith('mailto:') ? 'text/plain' : undefined} class="space-y-6">
+          {fields.map((field) => (
+            <label class="block text-small">
+              <span class="text-ink/70">{field.label}{field.required && ' *'}</span>
+              {field.type === 'textarea' ? (
+                <textarea name={field.name} rows="4" required={field.required} class={fieldClass} />
+              ) : (
+                <input type={field.type ?? 'text'} name={field.name} required={field.required} class={fieldClass} />
+              )}
+            </label>
+          ))}
+          <button type="submit" class="rounded-ui bg-accent px-6 py-2.5 text-small font-medium text-paper transition-colors hover:bg-ink">{submitLabel}</button>
+        </form>
+      ) : (
+        phone && <Button href={telHref(phone)}>{phone}</Button>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+import type { SectionProps } from '../../../types/sections';
+import Button from '../../ui/Button.astro';
+import SectionHeading from '../../ui/SectionHeading.astro';
+
+type Props = SectionProps<'pricing'>;
+const { id, title, subtitle, settings } = Astro.props;
+const { note, plans = [] } = settings;
+---
+<section id={id} class="py-20 lg:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading title={title} subtitle={subtitle} class="mb-10 max-w-2xl" />
+
+    <ul class="border-t border-ink/20">
+      {plans.map((plan) => (
+        <li class:list={['grid gap-x-8 gap-y-4 border-b border-ink/15 py-8 lg:grid-cols-12 lg:items-start', plan.highlighted && 'border-l-2 border-l-accent bg-ink/[0.035] pl-4 lg:pl-6']}>
+          <div class="lg:col-span-3">
+            <h3 class="text-h3">{plan.name}</h3>
+            {plan.description && <p class="mt-1 text-small text-ink/65">{plan.description}</p>}
+          </div>
+          <p class="font-serif text-3xl tabular-nums lg:col-span-3 lg:text-right">
+            {plan.price}
+            {plan.unit && <span class="ml-1 font-sans text-small text-ink/60">{plan.unit}</span>}
+          </p>
+          {plan.features && plan.features.length > 0 && (
+            <ul class="space-y-1.5 text-small text-ink/80 lg:col-span-4">
+              {plan.features.map((feature) => <li class="before:mr-2 before:text-accent before:content-['·']">{feature}</li>)}
+            </ul>
+          )}
+          {plan.cta?.label && (
+            <div class="lg:col-span-2 lg:text-right">
+              <Button href={plan.cta.href} variant={plan.highlighted ? 'primary' : 'secondary'}>{plan.cta.label}</Button>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+    {note && <p class="mt-5 max-w-prose text-small text-ink/60">{note}</p>}
+  </div>
+</section>
