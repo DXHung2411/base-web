@@ -1,7 +1,10 @@
 ---
 import Footer from '../components/Footer/Footer.astro';
 import Header from '../components/Header/Header.astro';
+import bodyFont from '@fontsource/be-vietnam-pro/files/be-vietnam-pro-latin-400-normal.woff2?url';
+import headingFont from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 import { assetUrl } from '../lib/assets';
+import { publicApiUrl } from '../lib/env';
 import type { SiteConfig } from '../lib/settingDefs';
 import { themeToCss } from '../lib/theme';
 import '../styles/site.css';
@@ -60,6 +63,10 @@ const organization = {
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
     {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href={publicApiUrl()} />
 
     <style set:html={themeToCss(site)}></style>
     <script type="application/ld+json" set:html={JSON.stringify(organization)} />

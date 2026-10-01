@@ -20,7 +20,7 @@ const { note, plans = [] } = settings;
           </div>
           <p class="font-serif text-3xl tabular-nums lg:col-span-3 lg:text-right">
             {plan.price}
-            {plan.unit && <span class="ml-1 font-sans text-small text-ink/60">{plan.unit}</span>}
+            {plan.unit && <span class="ml-1 font-sans text-small text-ink/65">{plan.unit}</span>}
           </p>
           {plan.features && plan.features.length > 0 && (
             <ul class="space-y-1.5 text-small text-ink/80 lg:col-span-4">
@@ -35,6 +35,6 @@ const { note, plans = [] } = settings;
         </li>
       ))}
     </ul>
-    {note && <p class="mt-5 max-w-prose text-small text-ink/60">{note}</p>}
+    {note && <p class="mt-5 max-w-prose text-small text-ink/65">{note}</p>}
   </div>
 </section>

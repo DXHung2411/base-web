@@ -9,5 +9,6 @@ export default defineConfig({
   integrations: [preact()],
   site: process.env.SITE_URL || 'http://localhost:4321',
   server: { port: 4321 },
+  build: { inlineStylesheets: 'always' },
   vite: { plugins: [tailwindcss()] },
 });

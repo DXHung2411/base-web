@@ -17,7 +17,7 @@ const { quote, quoteAuthor, image, highlights = [] } = settings;
         {image?.src && <Img src={image.src} alt={image.alt} width={720} height={960} class="aspect-[3/4] rounded-media" />}
         {quote && (
           <blockquote class:list={['border-l-2 border-accent pl-5', image?.src && 'mt-8']}>
-            <p class="font-serif text-2xl italic leading-snug">{quote}</p>
+            <p class="font-serif text-2xl leading-snug">{quote}</p>
             {quoteAuthor && <footer class="mt-3 text-small text-muted">{quoteAuthor}</footer>}
           </blockquote>
         )}

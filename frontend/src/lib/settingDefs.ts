@@ -35,7 +35,8 @@ export const settingDefs = [
   def('Mạng xã hội', 'social.zalo', 'Zalo', 'text'),
 
   def('Giao diện', 'theme.primaryColor', 'Màu nhấn (nút, liên kết)', 'color', '#7b2d26'),
-  def('Giao diện', 'theme.secondaryColor', 'Màu phụ (đường kẻ, chú thích)', 'color', '#9a8460'),
+  def('Giao diện', 'theme.secondaryColor', 'Màu phụ (chú thích, nhãn nhỏ)', 'color', '#7d6a45',
+    'Dùng cho chữ nhỏ, nên chọn màu đủ tương phản với màu nền (tối thiểu 4.5:1).'),
   def('Giao diện', 'theme.backgroundColor', 'Màu nền', 'color', '#f5f0e6'),
   def('Giao diện', 'theme.textColor', 'Màu chữ', 'color', '#1d1916'),
   def('Giao diện', 'theme.fontFamily', 'Font nội dung', 'text', "'Be Vietnam Pro', system-ui, sans-serif",
