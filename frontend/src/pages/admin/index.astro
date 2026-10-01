@@ -1,0 +1,21 @@
+---
+import AdminApp from '../../admin/AdminApp';
+import '../../styles/global.css';
+import { publicApiUrl } from '../../lib/env';
+
+// Read at request time so one build can be deployed against any API URL.
+const apiUrl = publicApiUrl();
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Quản trị · Landing CMS</title>
+  </head>
+  <body class="admin">
+    <AdminApp client:only="preact" apiUrl={apiUrl} />
+  </body>
+</html>
